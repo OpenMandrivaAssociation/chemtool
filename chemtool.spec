@@ -1,5 +1,5 @@
 %define	name	chemtool
-%define version 1.6.10
+%define version 1.6.11
 %define release %mkrel 1
 
 Summary:	Chemtool is a program for 2D drawing organic molecules
@@ -8,11 +8,11 @@ Version:	%{version}
 Release:	%{release}
 License:	GPL
 Group:		Sciences/Chemistry
-Source0:	http://ruby.chemie.uni-freiburg.de/~martin/chemtool/%{name}-%{version}.tar.bz2
+Source0:	http://ruby.chemie.uni-freiburg.de/~martin/chemtool/%{name}-%{version}.tar.gz
 Url:		http://ruby.chemie.uni-freiburg.de/~martin/chemtool/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires:	transfig openbabel
-BuildRequires:	gtk2-devel
+BuildRequires:	gtk2-devel gettext-devel
 Source11:	%{name}.16.png
 Source12:	%{name}.32.png
 Source13:	%{name}.48.png
@@ -25,9 +25,10 @@ the GTK widget set.
 
 %prep
 %setup -q
-%patch0 -p1 
+#%patch0 -p1 
 
 %build
+./autogen.sh
 %configure2_5x
 %make
 
@@ -46,18 +47,6 @@ for L in `ls locales`; do \
 	install -m644 locales/$L/chemtool.mo \
 	$RPM_BUILD_ROOT%{_datadir}/locale/$L/LC_MESSAGES; done
 
-# menu entry
-install -d $RPM_BUILD_ROOT%{_menudir}
-cat > $RPM_BUILD_ROOT%{_menudir}/%{name} <<EOF
-?package(%{name}):\
-command="%{_bindir}/chemtool"\
-title="Chemtool"\
-longtitle="A program for drawing organic molecules"\
-needs="x11"\
-icon="chemtool.png"\
-section="More Applications/Sciences/Chemistry" \
-xdg="true"
-EOF
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
@@ -68,7 +57,7 @@ Exec=%{_bindir}/%{name}
 Icon=chemtool
 Terminal=false
 Type=Application
-Categories=X-MandrivaLinux-MoreApplications-Sciences-Chemistry;Science;Chemistry;
+Categories=Science;Chemistry;
 EOF
 
 
@@ -94,10 +83,7 @@ rm -rf $RPM_BUILD_ROOT
 %_bindir/*
 %_datadir/%{name}-%{version}
 %_mandir/man1/*
-%{_menudir}/%{name}
 %{_datadir}/applications/mandriva-%{name}.desktop
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
-
-
