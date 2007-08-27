@@ -25,46 +25,38 @@ the GTK widget set.
 
 %prep
 %setup -q
-#%patch0 -p1 
 
 %build
 ./autogen.sh
-%configure2_5x
+%configure2_5x --with-kdedir=%{_prefix}
 %make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_mandir}/man1
-install -d $RPM_BUILD_ROOT%{_datadir}/%name-%version/examples
-for L in `ls locales`; do \
-	install -d $RPM_BUILD_ROOT%{_datadir}/locale/$L/LC_MESSAGES; done
 
-install -m755 %{name} -D $RPM_BUILD_ROOT%{_bindir}/%{name}
-install -m755 src-cht/cht -D $RPM_BUILD_ROOT%{_bindir}/cht
-install -m644 examples/* $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}/examples
-install -m644 {%{name}.1,cht.1} $RPM_BUILD_ROOT%{_mandir}/man1/
-for L in `ls locales`; do \
-	install -m644 locales/$L/chemtool.mo \
-	$RPM_BUILD_ROOT%{_datadir}/locale/$L/LC_MESSAGES; done
+%makeinstall_std
 
+mkdir -p %buildroot%_datadir/%{name}-%{version}
+install -m644 examples/* %buildroot%_datadir/%{name}-%{version}/
 
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
-[Desktop Entry]
-Name=Chemtool
-Comment=A program for drawing organic molecules
-Exec=%{_bindir}/%{name} 
-Icon=chemtool
-Terminal=false
-Type=Application
-Categories=Science;Chemistry;
-EOF
+mkdir -p %buildroot%{_datadir}/applications
+desktop-file-install --vendor='' \
+	--dir=%buildroot%{_datadir}/applications/ \
+	--remove-category='Application' \
+	--add-category='GTK' \
+	--add-category='Science' \
+	%{name}.desktop
 
+install -D -m644 kde/mimelnk/application/x-chemtool.desktop %buildroot%{_datadir}/mimelnk/application/x-chemtool.desktop
+install -D -m644 kde/icons/hicolor/32x32/mimetypes/chemtool.png %buildroot%{_iconsdir}/hicolor/32x32/mimetypes/chemtool.png
 
 # icons
 %{__install} -m644 %{SOURCE11} -D $RPM_BUILD_ROOT%{_miconsdir}/%{name}.png
 %{__install} -m644 %{SOURCE12} -D $RPM_BUILD_ROOT%{_iconsdir}/%{name}.png
 %{__install} -m644 %{SOURCE13} -D $RPM_BUILD_ROOT%{_liconsdir}/%{name}.png
+%{__install} -m644 %{SOURCE11} -D $RPM_BUILD_ROOT%{_iconsdir}/hicolor/16x16/apps/%{name}.png
+%{__install} -m644 %{SOURCE12} -D $RPM_BUILD_ROOT%{_iconsdir}/hicolor/32x32/apps/%{name}.png
+%{__install} -m644 %{SOURCE13} -D $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/%{name}.png
 
 %{find_lang} %{name}
 
@@ -73,9 +65,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 %{update_menus}
+%{update_mime_database}
+%{update_icon_cache hicolor}
 
 %postun
 %{clean_menus}
+%{clean_mime_database}
+%{clean_icon_cache hicolor}
 
 %files -f %{name}.lang
 %defattr(-,root,root)
@@ -83,7 +79,9 @@ rm -rf $RPM_BUILD_ROOT
 %_bindir/*
 %_datadir/%{name}-%{version}
 %_mandir/man1/*
-%{_datadir}/applications/mandriva-%{name}.desktop
+%{_datadir}/applications/*.desktop
+%{_datadir}/mimelnk/*/.desktop
+%{_iconsdir}/hicolor/*/*/*.png
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
