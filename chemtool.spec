@@ -80,7 +80,7 @@ rm -rf $RPM_BUILD_ROOT
 %_datadir/%{name}-%{version}
 %_mandir/man1/*
 %{_datadir}/applications/*.desktop
-%{_datadir}/mimelnk/*/.desktop
+%{_datadir}/mimelnk/*/*.desktop
 %{_iconsdir}/hicolor/*/*/*.png
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
