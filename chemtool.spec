@@ -12,7 +12,7 @@ Source0:	http://ruby.chemie.uni-freiburg.de/~martin/chemtool/%{name}-%{version}.
 Url:		http://ruby.chemie.uni-freiburg.de/~martin/chemtool/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires:	transfig openbabel
-BuildRequires:	gtk2-devel gettext-devel
+BuildRequires:	gtk2-devel gettext-devel desktop-file-utils
 Source11:	%{name}.16.png
 Source12:	%{name}.32.png
 Source13:	%{name}.48.png
