@@ -40,6 +40,13 @@ mkdir -p %buildroot%_datadir/%{name}-%{version}
 install -m644 examples/* %buildroot%_datadir/%{name}-%{version}/
 
 mkdir -p %buildroot%{_datadir}/applications
+
+# (tv) fix 'error: value "chemtool.png" for key "Icon" in group "Desktop Entry"
+# is an icon name with an extension, but there should be no extension as
+# described in the Icon Theme Specification if the value is not an absolute
+# path':
+perl -pi -e 's!^(Icon=).*/([^/]*)$!\1\2!' %{name}.desktop
+
 desktop-file-install --vendor='' \
 	--dir=%buildroot%{_datadir}/applications/ \
 	--remove-category='Application' \
