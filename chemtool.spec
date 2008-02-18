@@ -45,7 +45,7 @@ mkdir -p %buildroot%{_datadir}/applications
 # is an icon name with an extension, but there should be no extension as
 # described in the Icon Theme Specification if the value is not an absolute
 # path':
-perl -pi -e 's!^(Icon=).*/([^/]*)$!\1\2!' %{name}.desktop
+perl -pi -e 's!^(Icon=).*/([^/]*)$!\1\2!; s!.png$!!' %{name}.desktop
 
 desktop-file-install --vendor='' \
 	--dir=%buildroot%{_datadir}/applications/ \
