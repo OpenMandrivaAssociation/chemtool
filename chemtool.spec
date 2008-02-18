@@ -2,7 +2,7 @@
 %define version 1.6.11
 %define release %mkrel 1
 
-Summary:	Chemtool is a program for 2D drawing organic molecules
+Summary:	Program for 2D drawing organic molecules
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
