@@ -70,15 +70,19 @@ install -D -m644 kde/icons/hicolor/32x32/mimetypes/chemtool.png %buildroot%{_ico
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%if %mdkversion < 200900
 %post
 %{update_menus}
 %{update_mime_database}
 %{update_icon_cache hicolor}
+%endif
 
+%if %mdkversion < 200900
 %postun
 %{clean_menus}
 %{clean_mime_database}
 %{clean_icon_cache hicolor}
+%endif
 
 %files -f %{name}.lang
 %defattr(-,root,root)
