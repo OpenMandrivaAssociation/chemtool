@@ -1,6 +1,6 @@
 %define	name	chemtool
-%define version 1.6.11
-%define release %mkrel 4
+%define version 1.6.12
+%define release %mkrel 1
 
 Summary:	Program for 2D drawing organic molecules
 Name:		%{name}
