@@ -27,13 +27,11 @@ the GTK widget set.
 %setup -q
 
 %build
-./autogen.sh
-%configure2_5x --with-kdedir=%{_prefix}
+%configure2_5x
 %make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 %makeinstall_std
 
 mkdir -p %buildroot%_datadir/%{name}-%{version}
@@ -54,7 +52,6 @@ desktop-file-install --vendor='' \
 	--add-category='Science' \
 	%{name}.desktop
 
-install -D -m644 kde/mimelnk/application/x-chemtool.desktop %buildroot%{_datadir}/mimelnk/application/x-chemtool.desktop
 install -D -m644 kde/icons/hicolor/32x32/mimetypes/chemtool.png %buildroot%{_iconsdir}/hicolor/32x32/mimetypes/chemtool.png
 
 # icons
@@ -91,7 +88,6 @@ rm -rf $RPM_BUILD_ROOT
 %_datadir/%{name}-%{version}
 %_mandir/man1/*
 %{_datadir}/applications/*.desktop
-%{_datadir}/mimelnk/*/*.desktop
 %{_iconsdir}/hicolor/*/*/*.png
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
