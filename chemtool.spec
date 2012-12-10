@@ -72,3 +72,50 @@ install -D -m644 kde/icons/hicolor/32x32/mimetypes/chemtool.png %buildroot%{_ico
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
+
+
+%changelog
+* Sun Feb 05 2012 Alexander Khrukin <akhrukin@mandriva.org> 1.6.13-1
++ Revision: 771306
+- version update 1.6.13
+
+* Sun Aug 22 2010 Funda Wang <fwang@mandriva.org> 1.6.12-1mdv2011.0
++ Revision: 571834
+- drop kde3 mimelnk
+
+* Sun Jun 14 2009 Frederik Himpe <fhimpe@mandriva.org> 1.6.12-1mdv2010.0
++ Revision: 385896
+- update to new version 1.6.12
+
+* Wed Jul 23 2008 Thierry Vignaud <tv@mandriva.org> 1.6.11-4mdv2009.0
++ Revision: 243876
+- rebuild
+
+  + Pixel <pixel@mandriva.com>
+    - rpm filetriggers deprecates update_menus/update_scrollkeeper/update_mime_database/update_icon_cache/update_desktop_database/post_install_gconf_schemas
+
+* Mon Feb 18 2008 Thierry Vignaud <tv@mandriva.org> 1.6.11-2mdv2008.1
++ Revision: 171793
+- fix 'error: value "chemtool.png" for key "Icon" in group "Desktop Entry" is
+  an icon name with an extension, but there should be no extension as described
+  in the Icon Theme Specification if the value is not an absolute path'
+- rebuild
+- fix "foobar is blabla" summary (=> "blabla") so that it looks nice in rpmdrake
+- kill re-definition of %%buildroot on Pixel's request
+
+  + Olivier Blin <blino@mandriva.org>
+    - restore BuildRoot
+
+* Mon Aug 27 2007 Funda Wang <fwang@mandriva.org> 1.6.11-1mdv2008.0
++ Revision: 72094
+- BR desktop-file-utils
+- use more generic install macro
+- switch to hicolor theme
+- install kde stuff
+- New version 1.6.11
+
+* Thu May 10 2007 Austin Acton <austin@mandriva.org> 1.6.10-1mdv2008.0
++ Revision: 25853
+- new version
+- rebuild for openbabel
+
