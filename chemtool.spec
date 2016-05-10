@@ -1,6 +1,6 @@
 %define	name	chemtool
-%define version 1.6.13
-%define release 2
+%define version 1.6.14
+%define release 1
 
 Summary:	Program for 2D drawing organic molecules
 Name:		%{name}
@@ -11,7 +11,7 @@ Group:		Sciences/Chemistry
 Source0:	http://ruby.chemie.uni-freiburg.de/~martin/chemtool/%{name}-%{version}.tar.gz
 Url:		http://ruby.chemie.uni-freiburg.de/~martin/chemtool/
 Requires:	transfig openbabel
-BuildRequires:	gtk2-devel gettext-devel desktop-file-utils
+BuildRequires:	gtk+2.0-devel gettext-devel desktop-file-utils
 Source11:	%{name}.16.png
 Source12:	%{name}.32.png
 Source13:	%{name}.48.png
@@ -48,6 +48,7 @@ desktop-file-install --vendor='' \
 	--remove-category='Application' \
 	--add-category='GTK' \
 	--add-category='Science' \
+	--add-category='Education' \
 	%{name}.desktop
 
 install -D -m644 kde/icons/hicolor/32x32/mimetypes/chemtool.png %buildroot%{_iconsdir}/hicolor/32x32/mimetypes/chemtool.png
