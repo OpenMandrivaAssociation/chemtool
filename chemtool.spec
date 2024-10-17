@@ -9,7 +9,7 @@ Release:	%{release}
 License:	GPL
 Group:		Sciences/Chemistry
 Source0:	http://ruby.chemie.uni-freiburg.de/~martin/chemtool/%{name}-%{version}.tar.gz
-Url:		http://ruby.chemie.uni-freiburg.de/~martin/chemtool/
+Url:		https://ruby.chemie.uni-freiburg.de/~martin/chemtool/
 Requires:	transfig openbabel
 BuildRequires:	gtk+2.0-devel gettext-devel desktop-file-utils
 Source11:	%{name}.16.png
