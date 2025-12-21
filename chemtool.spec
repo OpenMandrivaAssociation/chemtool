@@ -11,6 +11,11 @@ Group:		Sciences/Chemistry
 Source0:	http://ruby.chemie.uni-freiburg.de/~martin/chemtool/%{name}-%{version}.tar.gz
 Url:		https://ruby.chemie.uni-freiburg.de/~martin/chemtool/
 Requires:	transfig openbabel
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	gtk+2.0-devel gettext-devel desktop-file-utils
 Source11:	%{name}.16.png
 Source12:	%{name}.32.png
